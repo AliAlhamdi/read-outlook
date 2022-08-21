@@ -33,6 +33,7 @@ def read_email(received_dt, folder=None, subject=None, email=None):
     messages.Sort("[ReceivedTime]", True)
     # --Take the emails from specific email and subject--
     messages = messages.Restrict("[ReceivedTime] >= '" + adjust_date(received_dt) + "'")
+    messages = messages.Restrict("[ReceivedTime] <= '" + adjust_date(received_dt + timedelta(days=1)) + "'")
     if email != None:
         messages = messages.Restrict("[SenderEmailAddress] = '"+ email + "'")
     if subject != None:
